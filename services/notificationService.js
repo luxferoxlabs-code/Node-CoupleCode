@@ -1,6 +1,5 @@
 const admin = require('firebase-admin');
 
-// Check if Firebase app has already been initialized
 if (admin.apps.length === 0) {
   const serviceAccount = JSON.parse(
     Buffer.from(process.env.FIREBASE_ADMIN_SDK_BASE64, 'base64').toString('utf8')
