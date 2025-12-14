@@ -1,11 +1,17 @@
 const admin = require('firebase-admin');
-// const serviceAccount = require('../couplecode-e645d-firebase-adminsdk-fbsvc-42dae333a8.json');
-const serviceAccount = JSON.parse(
+// const serviceAccount = require('../couplecode-35a9e-firebase-adminsdk-fbsvc-3a1e7408e4.json');
+
+if (admin.apps.length === 0) {
+  // const serviceAccount = require('../couplecode-35a9e-firebase-adminsdk-fbsvc-3a1e7408e4.json');
+  const serviceAccount = JSON.parse(
     Buffer.from(process.env.FIREBASE_ADMIN_SDK_BASE64, "base64")
   );
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+  });
+} else {
+  admin.app(); // If already initialized, reuse the existing app
+}
 
 const messaging = admin.messaging();
 
