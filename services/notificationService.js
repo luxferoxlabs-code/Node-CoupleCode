@@ -1,13 +1,13 @@
 const admin = require('firebase-admin');
-// const serviceAccount = require('../couplecode-35a9e-firebase-adminsdk-fbsvc-3a1e7408e4.json');
 
+// Check if Firebase app has already been initialized
 if (admin.apps.length === 0) {
-  // const serviceAccount = require('../couplecode-35a9e-firebase-adminsdk-fbsvc-3a1e7408e4.json');
   const serviceAccount = JSON.parse(
-    Buffer.from(process.env.FIREBASE_ADMIN_SDK_BASE64, "base64")
+    Buffer.from(process.env.FIREBASE_ADMIN_SDK_BASE64, 'base64').toString('utf8')
   );
+
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount),
   });
 } else {
   admin.app(); // If already initialized, reuse the existing app
